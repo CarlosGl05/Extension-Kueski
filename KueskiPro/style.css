@@ -1,0 +1,97 @@
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+body::-webkit-scrollbar, .screen::-webkit-scrollbar { display: none; }
+body, .screen { -ms-overflow-style: none; scrollbar-width: none; }
+
+body { width: 400px; height: 650px; background-color: #ffffff; overflow-x: hidden; position: relative; }
+
+.screen { display: none; width: 100%; height: 100%; overflow-y: auto; }
+.screen.active { display: block; }
+#screen-login, #screen-main { padding: 20px; }
+
+.bg-light { background-color: #f4f7fc; }
+.text-center { text-align: center; }
+.text-blue { color: #1a56ff !important; }
+.text-gray { color: #666; }
+.text-small { font-size: 14px; margin-top: 5px; }
+.text-xsmall { font-size: 12px; margin-top: 5px; margin-bottom: 15px; }
+.left { text-align: left; }
+
+h2 { text-align: center; margin-top: 10px; color: #111; }
+h3 { margin-bottom: 5px; }
+.subtitle { text-align: center; color: #666; font-size: 14px; margin-bottom: 25px; }
+.section-title { margin-top: 20px; margin-bottom: 10px; font-size: 18px; color: #222; }
+
+.header-blue { background-color: #1a56ff; color: white; padding: 15px; display: flex; align-items: center; }
+.btn-back { background: none; border: none; color: white; font-size: 16px; cursor: pointer; font-weight: bold; }
+
+.content-padded { padding: 20px; }
+
+.logo-container { display: flex; align-items: center; justify-content: center; margin-top: 20px; margin-bottom: 10px; gap: 10px; }
+.logo-container.small { margin-top: 0; }
+.header-logo-img { height: 45px; width: auto; border-radius: 8px; }
+.header-logo-img-small { height: 24px; width: auto; border-radius: 4px; }
+.logo-text { color: #007bff; font-size: 28px; font-weight: bold; }
+
+.input-group { margin-bottom: 15px; }
+.input-group label { display: block; font-size: 14px; font-weight: bold; margin-bottom: 5px; color: #333; }
+input[type="text"], input[type="password"] { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; outline: none; }
+.input-gray { background-color: #fff; margin-bottom: 15px; }
+.small-label { display: block; font-size: 12px; font-weight: bold; margin-top: 10px; margin-bottom: 5px; color: #333; }
+
+button { width: 100%; padding: 12px; border-radius: 8px; font-size: 15px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+.btn-primary { background-color: #1a56ff; color: white; border: none; margin-bottom: 15px;}
+.lighter-blue { background-color: #4d84ff; }
+.btn-outline { background-color: white; color: #1a56ff; border: 1px solid #1a56ff; }
+#btn-show-credit { background-color: white; color: #1a56ff; border: 1px solid #1a56ff; margin-top: 15px; }
+.btn-danger { background-color: #ff3b3b; color: white; border: none; width: auto; padding: 8px 15px; font-size: 13px;}
+.btn-gray { background-color: #d1d5db; color: white; border: none; }
+.outline-blue { border: 1px solid #1a56ff; }
+.bg-transparent { background-color: transparent; }
+
+.link-forgot { display: block; text-align: right; color: #1a56ff; text-decoration: none; font-size: 13px; margin-bottom: 20px; }
+.divider { text-align: center; color: #999; margin: 15px 0; font-size: 12px; }
+.terms { text-align: center; color: #999; font-size: 12px; margin-top: 30px; }
+
+.header-main { display: flex; justify-content: space-between; padding: 0 0 20px 0; align-items: center; }
+.menu-options { display: flex; flex-direction: column; gap: 15px; }
+.card-btn { text-align: left; padding: 20px; border: none; display: flex; flex-direction: column; gap: 5px; }
+.primary-card { background-color: #1a56ff; color: white; }
+.secondary-card { background-color: #3b82f6; color: white; }
+.outline-card { background-color: white; color: #1a56ff; border: 1px solid #1a56ff; }
+.card-btn p { font-size: 13px; font-weight: normal; opacity: 0.9; }
+
+.card { background: white; border-radius: 10px; padding: 15px; margin-bottom: 15px; border: 1px solid #e5e7eb; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+.light-blue-bg { background-color: #f0f4ff; border: 1px solid #cce0ff; }
+.border-left-blue { border-left: 4px solid #1a56ff; }
+.profile-card { display: flex; justify-content: space-between; align-items: center; }
+.greeting { font-size: 12px; color: #666; }
+.user-name { color: #1a56ff; font-size: 20px; margin-top: 2px; }
+.avatar { background: #e0e7ff; color: #1a56ff; border-radius: 50%; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; }
+
+.cart-card { display: flex; gap: 15px; align-items: center; background-color: #1a56ff; color: white; }
+.cart-icon-img { width: 35px; height: 35px; object-fit: contain; background-color: white; border-radius: 8px; padding: 2px; }
+.cart-title { font-size: 12px; opacity: 0.8; display: block; margin-bottom: 2px;}
+.title-with-icon { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
+hr { border: 0; border-top: 1px solid #ccc; margin-bottom: 20px; }
+.name-icon-img { width: 35px; height: 35px; border-radius: 8px; }
+
+.radio-group { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-weight: bold; color: #333;}
+.flex-between { justify-content: space-between; width: 100%; }
+.badge { background: #1a56ff; color: white; font-size: 11px; padding: 3px 8px; border-radius: 10px; }
+.dropdown { width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; outline: none; }
+.active-card { border: 1px solid #1a56ff; background-color: #f8faff; }
+.payment-details p { font-size: 13px; color: #666; margin-left: 25px; margin-bottom: 15px; }
+
+.amount { font-size: 26px; margin-top: 5px; }
+.alert-box { background-color: #fff9c4; border: 1px solid #fff59d; padding: 12px; border-radius: 8px; font-size: 13px; color: #333; margin-bottom: 20px; text-align: center; }
+
+.alert-success { background-color: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; padding: 12px; border-radius: 8px; font-size: 13px; margin-top: 15px; display: none; }
+.alert-success.show { display: flex; gap: 10px; align-items: flex-start; }
+.check-icon { color: #16a34a; font-weight: bold; }
+
+.benefits-card { background-color: #f0f4ff; border: 1px solid #cce0ff; display: none; }
+.benefits-card h4 { color: #1a56ff; margin-bottom: 10px; }
+.benefits-list { list-style-type: none; padding-left: 0; }
+.benefits-list li { font-size: 13px; color: #333; margin-bottom: 5px; display: flex; align-items: center; }
+.benefits-list li::before { content: "•"; color: #1a56ff; font-weight: bold; display: inline-block; width: 1em; margin-left: -1em; }

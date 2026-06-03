@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Kueski Mockup",
+  "version": "1.0",
+  "description": "Mockup funcional basado en capturas de pantalla.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "logo.png",
+      "48": "logo.png",
+      "128": "logo.png"
+    }
+  },
+  "icons": {
+    "16": "logo.png",
+    "48": "logo.png",
+    "128": "logo.png"
+  },
+  "host_permissions": [
+    "http://localhost:3000/*"
+  ]
+}

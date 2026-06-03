@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="screen-login" class="screen active">
+    <div class="logo-container">
+      <img src="logo.png" alt="logo kueski" class="header-logo-img">
+      <span class="logo-text">kueski</span>
+    </div>
+    
+    <h2>Bienvenido</h2>
+    <p class="subtitle">Inicia sesión para continuar</p>
+
+    <div class="input-group">
+      <label>Usuario</label>
+      <input type="text" placeholder="Ingresa tu usuario">
+    </div>
+    <div class="input-group">
+      <label>Contraseña</label>
+      <input type="password" placeholder="Ingresa tu contraseña">
+    </div>
+    
+    <a href="#" class="link-forgot">¿Olvidaste tu contraseña?</a>
+    
+    <button id="btn-login" class="btn-primary">Iniciar Sesión</button>
+    <div class="divider">o</div>
+    <button class="btn-outline">Registrarse</button>
+    
+    <p class="terms">Al continuar, aceptas nuestros Términos y Condiciones</p>
+  </div>
+
+  <div id="screen-main" class="screen">
+    <div class="header-main">
+      <div class="logo-container small">
+        <img src="logo.png" alt="logo kueski" class="header-logo-img-small">
+        <span class="logo-text">kueski</span>
+      </div>
+      <button id="btn-logout" class="btn-danger">Cerrar Sesión</button>
+    </div>
+
+    <h2>¿Cómo podemos ayudarte?</h2>
+    <p class="subtitle">Selecciona una opción para continuar</p>
+
+    <div class="menu-options">
+      <button id="nav-payment" class="card-btn primary-card">
+        <h3>Continuar a Pagar</h3>
+        <p>Finaliza tu compra con Kueski Pay</p>
+      </button>
+
+      <button id="nav-credit" class="card-btn secondary-card">
+        <h3>Ver Línea de Crédito</h3>
+        <p>Consulta tu saldo y límite disponible</p>
+      </button>
+
+      <button id="nav-rewards" class="card-btn outline-card">
+        <h3>Cupones y Recompensas</h3>
+        <p>Activa cupones y cashback en Amazon</p>
+      </button>
+    </div>
+  </div>
+
+  <div id="screen-payment" class="screen bg-light">
+    <div class="header-blue">
+      <button class="btn-back">← Regresar</button>
+    </div>
+    <div class="content-padded">
+      <div class="card profile-card">
+        <div>
+          <span class="greeting">Bienvenido de nuevo,</span>
+          <h3 class="user-name">Carlos</h3>
+        </div>
+        <div class="avatar">👤</div>
+      </div>
+
+      <div class="card cart-card">
+        <img src="logo.png" alt="logo kueski" class="cart-icon-img">
+        <div>
+          <span class="cart-title">Amazon y Kueski Pay</span>
+          <h4>Finaliza tu compra</h4>
+        </div>
+      </div>
+
+      <h3 class="section-title">Opciones de pago</h3>
+      
+      <div class="card">
+        <div class="radio-group">
+          <input type="radio" id="cupon" name="pago">
+          <label for="cupon">🎟️ Seleccionar/Activar Cupón</label>
+        </div>
+        <select class="dropdown"><option>Cupones disponibles</option></select>
+      </div>
+
+      <div class="card active-card">
+        <div class="radio-group flex-between">
+          <div>
+            <input type="radio" id="kueski" name="pago" checked>
+            <label for="kueski">💳 Pago con Kueski Pay</label>
+          </div>
+          <span class="badge">Recomendado</span>
+        </div>
+        <div class="payment-details" id="payment-details-container">
+          <p>Seleccionar plan de pagos (quincenal)</p>
+          <button class="btn-primary">✓ Confirmar y Pagar con Kueski Pay</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="screen-credit" class="screen bg-light">
+    <div class="header-blue">
+      <button class="btn-back">← Regresar</button>
+    </div>
+    <div class="content-padded">
+      <div class="title-with-icon">
+        <img src="logo.png" alt="logo kueski" class="name-icon-img">
+        <h3 class="user-name">Carlos</h3>
+      </div>
+      <hr>
+
+      <div id="credit-hidden">
+        <div class="card text-center light-blue-bg">
+          <p>Haz clic en el botón para ver tu información de crédito</p>
+        </div>
+        <button id="btn-show-credit">
+          👁️ Ver Línea de Crédito
+        </button>
+      </div>
+
+      <div id="credit-shown" style="display: none;">
+        <div class="card light-blue-bg">
+          <p>Tu línea de crédito <strong>total</strong> es de:</p>
+          <h2 class="amount text-blue">$12,000 MXN</h2>
+          <br>
+          <p>Tu saldo disponible es de:</p>
+          <h3 class="amount text-blue">$8,500 MXN</h3>
+        </div>
+        
+        <div class="alert-box">
+          <strong>Recuerda pagar antes del 22 de abril de 2026</strong> para evitar cargos por pago tardío
+        </div>
+
+        <button id="btn-hide-credit" class="btn-primary">
+          👁️‍🗨️ Ocultar Información de Crédito
+        </button>
+        <button class="btn-primary lighter-blue">Ver Historial de Pagos</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="screen-rewards" class="screen bg-light">
+    <div class="header-blue">
+      <button class="btn-back">← Regresar</button>
+    </div>
+    <div class="content-padded">
+      <div class="card profile-card light-blue-bg border-left-blue">
+        <div>
+          <span class="greeting">Hola,</span>
+          <h3 class="user-name">Carlos</h3>
+        </div>
+      </div>
+
+      <h3 class="section-title">Cupones y Recompensas</h3>
+      <p class="subtitle left">Activa tus descuentos y beneficios</p>
+
+      <div class="card">
+        <h4 class="text-blue">🎟️ Activar Cupón de Descuento</h4>
+        <label class="small-label">Código de Cupón</label>
+        <input type="text" id="input-coupon" placeholder="INGRESA TU CÓDIGO AQUÍ" class="input-gray">
+        <button id="btn-activate-coupon" class="btn-gray">Activar Cupón</button>
+        
+        <div id="alert-coupon" class="alert-success">
+          <span class="check-icon">✓</span>
+          <div>
+            <strong>¡Cupón Activado!</strong><br>
+            Código: <span id="display-coupon-code"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h4 class="text-blue">💰 Cashback en Amazon</h4>
+        <p class="text-small">Obtén <strong>1% de cashback</strong> en todas tus compras de Amazon</p>
+        <p class="text-xsmall text-gray">El cashback se acreditará automáticamente en tu cuenta</p>
+        
+        <button id="btn-activate-cashback" class="btn-primary">Activar Cashback 1%</button>
+        
+        <div id="alert-cashback" class="alert-success">
+          <span class="check-icon">✓</span>
+          <div>
+            <strong>¡Cashback Activo!</strong><br>
+            Recibirás 1% de cashback en tus compras de Amazon
+          </div>
+        </div>
+      </div>
+
+      <div id="card-active-benefits" class="card benefits-card">
+        <h4>Beneficios Activos:</h4>
+        <ul class="benefits-list" id="benefits-list-container">
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
