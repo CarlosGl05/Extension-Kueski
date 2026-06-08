@@ -3,6 +3,9 @@
   "name": "Kueski Mockup",
   "version": "1.0",
   "description": "Mockup funcional basado en capturas de pantalla.",
+  "permissions": [
+    "storage"
+  ],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -18,5 +21,18 @@
   },
   "host_permissions": [
     "http://localhost:3000/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://*.amazon.com/*", "*://*.amazon.com.mx/*"],
+      "css": ["content.css"],
+      "js": ["content.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["logo.png", "popup.html", "style.css", "script.js"],
+      "matches": ["*://*.amazon.com/*", "*://*.amazon.com.mx/*"]
+    }
   ]
 }

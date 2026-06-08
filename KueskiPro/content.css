@@ -1,0 +1,75 @@
+/* ===================== BOTÓN FLOTANTE PERSISTENTE (FAB) ===================== */
+#kueski-fab {
+  position: fixed;
+  top: 24px; /* Cambiado a la parte superior */
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25), 0 0 0 1px rgba(37, 99, 235, 0.1);
+  z-index: 2147483646;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: kueskiFabIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+#kueski-fab:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
+}
+
+#kueski-fab img {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+}
+
+@keyframes kueskiFabIn { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+
+/* ===================== TOAST INICIAL ===================== */
+#kueski-floating-widget {
+  position: fixed;
+  top: 96px; /* Cambiado arriba, justo debajo del botón flotante */
+  right: 24px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.15), 0 2px 5px rgba(0,0,0,0.05);
+  z-index: 2147483647;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  display: flex;
+  align-items: center;
+  padding: 14px 18px;
+  gap: 16px;
+  border-left: 4px solid #2563eb;
+  transform: translateX(120%);
+  opacity: 0;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: kueskiToastIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.2s; 
+}
+
+#kueski-floating-widget:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px rgba(37, 99, 235, 0.2), 0 4px 10px rgba(0,0,0,0.08);
+}
+
+@keyframes kueskiToastIn { 0% { transform: translateX(120%); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
+@keyframes kueskiToastOut { 0% { transform: translateX(0); opacity: 1; } 100% { transform: translateX(120%); opacity: 0; } }
+
+.kueski-minimal-content { display: flex; align-items: center; gap: 14px; }
+.kueski-minimal-logo { width: 32px; height: 32px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+.kueski-minimal-text { display: flex; flex-direction: column; gap: 3px; }
+.kueski-fw-title { font-size: 11px; font-weight: 800; color: #2563eb; text-transform: uppercase; letter-spacing: 0.8px; }
+.kueski-fw-desc { font-size: 14px; color: #0f172a; margin: 0; }
+
+.kueski-minimal-close {
+  background: transparent; border: none; color: #94a3b8; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; padding: 4px;
+  transition: all 0.2s; border-radius: 6px;
+}
+.kueski-minimal-close:hover { color: #dc2626; background: #f1f5f9; }

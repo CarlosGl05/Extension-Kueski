@@ -7,93 +7,203 @@
 <body>
 
   <div id="screen-login" class="screen active">
-    <div class="logo-container">
-      <img src="logo.png" alt="logo kueski" class="header-logo-img">
-      <span class="logo-text">kueski</span>
-    </div>
-    
-    <h2>Bienvenido</h2>
-    <p class="subtitle">Inicia sesión para continuar</p>
-
-    <div class="input-group">
-      <label>Usuario</label>
-      <input type="text" placeholder="Ingresa tu usuario">
-    </div>
-    <div class="input-group">
-      <label>Contraseña</label>
-      <input type="password" placeholder="Ingresa tu contraseña">
-    </div>
-    
-    <a href="#" class="link-forgot">¿Olvidaste tu contraseña?</a>
-    
-    <button id="btn-login" class="btn-primary">Iniciar Sesión</button>
-    <div class="divider">o</div>
-    <button class="btn-outline">Registrarse</button>
-    
-    <p class="terms">Al continuar, aceptas nuestros Términos y Condiciones</p>
-  </div>
-
-  <div id="screen-main" class="screen">
-    <div class="header-main">
-      <div class="logo-container small">
-        <img src="logo.png" alt="logo kueski" class="header-logo-img-small">
-        <span class="logo-text">kueski</span>
+    <div class="login-wrap">
+      <div class="brand">
+        <img src="logo.png" alt="Kueski" class="brand-logo">
+        <span class="brand-name">kueski</span>
       </div>
-      <button id="btn-logout" class="btn-danger">Cerrar Sesión</button>
-    </div>
+      <h1 class="login-title">Bienvenido</h1>
+      <p class="login-sub">Inicia sesión para continuar</p>
 
-    <h2>¿Cómo podemos ayudarte?</h2>
-    <p class="subtitle">Selecciona una opción para continuar</p>
-
-    <div class="menu-options">
-      <button id="nav-payment" class="card-btn primary-card">
-        <h3>Continuar a Pagar</h3>
-        <p>Finaliza tu compra con Kueski Pay</p>
-      </button>
-
-      <button id="nav-credit" class="card-btn secondary-card">
-        <h3>Ver Línea de Crédito</h3>
-        <p>Consulta tu saldo y límite disponible</p>
-      </button>
-
-      <button id="nav-rewards" class="card-btn outline-card">
-        <h3>Cupones y Recompensas</h3>
-        <p>Activa cupones y cashback en Amazon</p>
-      </button>
+      <div class="field">
+        <label>Usuario</label>
+        <input type="text" placeholder="Ingresa tu usuario">
+      </div>
+      <div class="field">
+        <label>Contraseña</label>
+        <input type="password" placeholder="Ingresa tu contraseña">
+      </div>
+      <a href="#" class="link-forgot">¿Olvidaste tu contraseña?</a>
+      <button id="btn-login" class="btn-primary">Iniciar sesión</button>
+      <div class="divider"><span>o</span></div>
+      
+      <button id="btn-register" class="btn-ghost">Crear cuenta</button>
+      
+      <p class="terms">Al continuar aceptas nuestros Términos y Condiciones</p>
     </div>
   </div>
 
-  <div id="screen-payment" class="screen bg-light">
-    <div class="header-blue">
-      <button class="btn-back">← Regresar</button>
+  <div id="screen-dashboard" class="screen">
+    
+    <div class="hero">
+      <div class="hero-top">
+        <div class="hero-brand">
+          <img src="logo.png" alt="Kueski" class="hero-logo">
+          <span class="hero-brand-name">kueski</span>
+        </div>
+        <button id="btn-logout" class="hero-logout" title="Cerrar sesión">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        </button>
+      </div>
+      <h2 class="hero-name" id="hero-user-name">Carlos</h2>
+
+      <div class="tab-nav">
+        <button class="tab-btn active" data-tab="tab-home">Inicio</button>
+        <button class="tab-btn" data-tab="tab-benefits">Beneficios</button>
+        <button class="tab-btn" data-tab="tab-profile">Mi Perfil</button>
+      </div>
     </div>
+
+    <div class="cards-area">
+
+      <div id="tab-home" class="tab-content active">
+        <div class="card card-credit">
+          <div class="card-top">
+            <span class="card-label">Línea de crédito</span>
+            <button id="btn-toggle-credit" class="icon-btn">
+              <svg id="icon-eye-open" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg id="icon-eye-closed" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+            </button>
+          </div>
+          
+          <div id="credit-hidden-state">
+            <div class="blurred-amount">$·····</div>
+            <button id="btn-show-credit" class="pill-btn">Mostrar saldo</button>
+          </div>
+          
+          <div id="credit-shown-state" style="display:none">
+            <div class="credit-row">
+              <div class="credit-col">
+                <span class="credit-sub">Total</span>
+                <span class="credit-big" id="credit-total">$0</span>
+              </div>
+              <div class="credit-sep"></div>
+              <div class="credit-col">
+                <span class="credit-sub">Disponible</span>
+                <span class="credit-big blue" id="credit-available">$0</span>
+              </div>
+            </div>
+            <div class="prog-track"><div class="prog-fill" id="credit-progress" style="width:0%"></div></div>
+            <p class="corte-text" id="texto-corte">Paga antes del --/--/--</p>
+          </div>
+        </div>
+
+        <button id="nav-payment" class="hero-cta" style="margin-top: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+          <span>Continuar al pago</span>
+          <div class="cta-arrow">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+        </button>
+      </div>
+
+      <div id="tab-benefits" class="tab-content">
+        <div class="column-layout">
+          <div class="card card-sm card-cashback">
+            <div class="card-top"><span class="card-label">Cashback</span><span class="pct-badge">1%</span></div>
+            <p class="card-desc">Amazon</p>
+            <button id="btn-activate-cashback" class="pill-btn full">Activar</button>
+            <div id="cashback-active-msg" class="tag-success" style="display:none">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Activo
+            </div>
+          </div>
+          
+          <div class="card card-coupon">
+            <div class="card-top" style="margin-bottom: 8px;"><span class="card-label">Mis Cupones</span></div>
+            
+            <div id="user-coupons-list" class="coupon-list-container">
+              <p style="font-size: 12px; color: var(--sub); text-align: center; margin: 10px 0;">Cargando cupones...</p>
+            </div>
+
+            <div class="divider" style="margin: 14px 0;"><span>O AGREGA UNO NUEVO</span></div>
+            
+            <div style="display: flex; gap: 8px;">
+              <input type="text" id="input-coupon" placeholder="Código" class="coupon-field" style="flex: 1;">
+              <button id="btn-add-coupon" class="pill-btn coupon" style="margin-top: 0;">Añadir</button>
+            </div>
+            
+            <div id="alert-coupon" class="tag-success" style="display:none; justify-content: space-between;">
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span id="display-coupon-code"></span>
+              </div>
+              <button id="btn-remove-active-coupon" style="background:none; border:none; color:var(--green); cursor:pointer; font-weight:800;">&times;</button>
+            </div>
+          </div>
+
+        </div>
+        
+        <div id="benefits-section" style="display:none; margin-top: 12px;">
+          <div class="card benefits-card">
+            <span class="card-label">Beneficios activos</span>
+            <ul class="benefits-list" id="benefits-list-container"></ul>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-profile" class="tab-content">
+        <div class="card card-profile">
+          <div class="card-top">
+            <span class="card-label">Datos de la cuenta</span>
+          </div>
+          <div class="profile-row-top">
+            <div class="profile-av" id="profile-avatar-initials">?</div>
+            <div>
+              <p class="profile-name user-name-profile">Cargando...</p>
+              <p class="profile-id" id="profile-kueski-id">ID Kueski</p>
+            </div>
+          </div>
+          <div class="profile-stats">
+            <div class="pstat">
+              <span class="pstat-label">Adeudo Total</span>
+              <span class="pstat-val red" id="profile-moroso">$0.00</span>
+            </div>
+            <div class="pstat-sep"></div>
+            <div class="pstat">
+              <span class="pstat-label">Próximo Pago</span>
+              <span class="pstat-val" id="profile-fecha-corte">--/--/--</span>
+            </div>
+          </div>
+          <div id="profile-al-corriente" class="tag-success mt8" style="display:none">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Al corriente
+          </div>
+          <div id="profile-con-adeudo" class="tag-warn mt8" style="display:none">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Adeudo pendiente
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="screen-payment" class="screen">
+    
+    <div class="payment-hero">
+      <div class="ph-top">
+        <button class="btn-back-clean">← Regresar</button>
+        <div class="ph-user">
+          <span class="ph-greeting">Hola,</span>
+          <span class="ph-name user-name">Cargando...</span>
+        </div>
+      </div>
+      
+      <div class="ph-brand-box">
+        <div class="ph-brand-left">
+          <img src="logo.png" alt="Kueski" class="ph-logo">
+          <div class="ph-brand-text">
+            <span class="ph-subtitle">Amazon y Kueski Pay</span>
+            <h3 class="ph-title">Finaliza tu compra</h3>
+          </div>
+        </div>
+        <div class="ph-avatar">👤</div>
+      </div>
+    </div>
+
     <div class="content-padded">
-      <div class="card profile-card">
-        <div>
-          <span class="greeting">Bienvenido de nuevo,</span>
-          <h3 class="user-name">Carlos</h3>
-        </div>
-        <div class="avatar">👤</div>
-      </div>
-
-      <div class="card cart-card">
-        <img src="logo.png" alt="logo kueski" class="cart-icon-img">
-        <div>
-          <span class="cart-title">Amazon y Kueski Pay</span>
-          <h4>Finaliza tu compra</h4>
-        </div>
-      </div>
-
       <h3 class="section-title">Opciones de pago</h3>
       
-      <div class="card">
-        <div class="radio-group">
-          <input type="radio" id="cupon" name="pago">
-          <label for="cupon">🎟️ Seleccionar/Activar Cupón</label>
-        </div>
-        <select class="dropdown"><option>Cupones disponibles</option></select>
-      </div>
-
       <div class="card active-card">
         <div class="radio-group flex-between">
           <div>
@@ -103,106 +213,8 @@
           <span class="badge">Recomendado</span>
         </div>
         <div class="payment-details" id="payment-details-container">
-          <p>Seleccionar plan de pagos (quincenal)</p>
-          <button class="btn-primary">✓ Confirmar y Pagar con Kueski Pay</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="screen-credit" class="screen bg-light">
-    <div class="header-blue">
-      <button class="btn-back">← Regresar</button>
-    </div>
-    <div class="content-padded">
-      <div class="title-with-icon">
-        <img src="logo.png" alt="logo kueski" class="name-icon-img">
-        <h3 class="user-name">Carlos</h3>
-      </div>
-      <hr>
-
-      <div id="credit-hidden">
-        <div class="card text-center light-blue-bg">
-          <p>Haz clic en el botón para ver tu información de crédito</p>
-        </div>
-        <button id="btn-show-credit">
-          👁️ Ver Línea de Crédito
-        </button>
-      </div>
-
-      <div id="credit-shown" style="display: none;">
-        <div class="card light-blue-bg">
-          <p>Tu línea de crédito <strong>total</strong> es de:</p>
-          <h2 class="amount text-blue">$12,000 MXN</h2>
-          <br>
-          <p>Tu saldo disponible es de:</p>
-          <h3 class="amount text-blue">$8,500 MXN</h3>
-        </div>
-        
-        <div class="alert-box">
-          <strong>Recuerda pagar antes del 22 de abril de 2026</strong> para evitar cargos por pago tardío
-        </div>
-
-        <button id="btn-hide-credit" class="btn-primary">
-          👁️‍🗨️ Ocultar Información de Crédito
-        </button>
-        <button class="btn-primary lighter-blue">Ver Historial de Pagos</button>
-      </div>
-    </div>
-  </div>
-
-  <div id="screen-rewards" class="screen bg-light">
-    <div class="header-blue">
-      <button class="btn-back">← Regresar</button>
-    </div>
-    <div class="content-padded">
-      <div class="card profile-card light-blue-bg border-left-blue">
-        <div>
-          <span class="greeting">Hola,</span>
-          <h3 class="user-name">Carlos</h3>
-        </div>
-      </div>
-
-      <h3 class="section-title">Cupones y Recompensas</h3>
-      <p class="subtitle left">Activa tus descuentos y beneficios</p>
-
-      <div class="card">
-        <h4 class="text-blue">🎟️ Activar Cupón de Descuento</h4>
-        <label class="small-label">Código de Cupón</label>
-        <input type="text" id="input-coupon" placeholder="INGRESA TU CÓDIGO AQUÍ" class="input-gray">
-        <button id="btn-activate-coupon" class="btn-gray">Activar Cupón</button>
-        
-        <div id="alert-coupon" class="alert-success">
-          <span class="check-icon">✓</span>
-          <div>
-            <strong>¡Cupón Activado!</strong><br>
-            Código: <span id="display-coupon-code"></span>
           </div>
-        </div>
       </div>
-
-      <div class="card">
-        <h4 class="text-blue">💰 Cashback en Amazon</h4>
-        <p class="text-small">Obtén <strong>1% de cashback</strong> en todas tus compras de Amazon</p>
-        <p class="text-xsmall text-gray">El cashback se acreditará automáticamente en tu cuenta</p>
-        
-        <button id="btn-activate-cashback" class="btn-primary">Activar Cashback 1%</button>
-        
-        <div id="alert-cashback" class="alert-success">
-          <span class="check-icon">✓</span>
-          <div>
-            <strong>¡Cashback Activo!</strong><br>
-            Recibirás 1% de cashback en tus compras de Amazon
-          </div>
-        </div>
-      </div>
-
-      <div id="card-active-benefits" class="card benefits-card">
-        <h4>Beneficios Activos:</h4>
-        <ul class="benefits-list" id="benefits-list-container">
-        </ul>
-      </div>
-
     </div>
   </div>
 
