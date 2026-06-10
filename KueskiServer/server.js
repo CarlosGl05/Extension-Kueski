@@ -9,10 +9,11 @@ app.use(express.json());
 
 // Configuración de la conexión a la base de datos de XAMPP
 const db = mysql.createPool({
-  host: 'localhost',
-  user: 'root',      
-  password: '',      
-  database: 'kueskipro',
+  host: 'mysql-39b03a90-dabrival03.b.aivencloud.com',
+  user: 'avnadmin',
+  port: '22746',     
+  password: 'AVNS_ontfuibJigjnGFBKgBx',      
+  database: 'kueski',
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
