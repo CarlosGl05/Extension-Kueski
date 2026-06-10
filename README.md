@@ -29,7 +29,7 @@
 4. Ofrece una simulación de financiamiento con múltiples planes de pago.
 5. Gestiona cupones de descuento y cashback vinculados a la cuenta.
 
-La extensión se comunica con un **servidor backend local** (Node.js + Express) que se conecta a una base de datos **MySQL** (compatible con XAMPP/MariaDB).
+La extensión se comunica con un **servidor backend local** (Node.js + Express) que se conecta a una base de datos **MySQL alojada en la nube mediante [Aiven](https://aiven.io/)**.
 
 ---
 
@@ -96,8 +96,8 @@ Extension-Kueski/
 La extensión sigue una arquitectura **cliente-servidor de tres capas**:
 
 ```
-[Amazon.com]  ←→  [KueskiPro Extension]  ←→  [KueskiServer (localhost:3000)]  ←→  [MySQL / XAMPP]
-   Browser            Manifest V3               Node.js + Express                   MariaDB
+[Amazon.com]  ←→  [KueskiPro Extension]  ←→  [KueskiServer (localhost:3000)]  ←→  [Aiven Cloud MySQL]
+   Browser            Manifest V3               Node.js + Express                    MySQL en la nube
 ```
 
 ---
@@ -117,21 +117,43 @@ La extensión sigue una arquitectura **cliente-servidor de tres capas**:
 |---|---|---|
 | Node.js | — | Entorno de ejecución |
 | Express | ^5.2.1 | Framework HTTP y enrutamiento |
-| mysql2 | ^3.22.4 | Conector con MySQL/MariaDB |
+| mysql2 | ^3.22.4 | Conector con MySQL en la nube |
 | cors | ^2.8.6 | Manejo de CORS para la extensión |
 
-### Base de Datos
-| Tecnología | Versión | Uso |
-|---|---|---|
-| MySQL / MariaDB | 10.4.32 | Base de datos relacional |
-| XAMPP | — | Entorno de servidor local |
-| phpMyAdmin | 5.2.1 | Administración de la BD |
+### Base de Datos en la Nube
+| Tecnología | Uso |
+|---|---|
+| **Aiven for MySQL** | Servicio administrado de MySQL en la nube |
+| MySQL | Motor de base de datos relacional |
+
+> 🌐 La base de datos fue migrada de un entorno local (XAMPP) a **Aiven Cloud**, un servicio gestionado de MySQL que permite alta disponibilidad y acceso remoto seguro mediante SSL.
 
 ---
 
 ## 🗄️ Base de Datos
 
-La base de datos se llama **`kueskipro`** y contiene las siguientes tablas:
+La base de datos se llama **`kueski`** y está alojada en **Aiven Cloud MySQL**. Contiene las siguientes tablas:
+
+### Configuración de Conexión (Aiven)
+
+La conexión al servicio de Aiven se configura en `KueskiServer/server.js` con los siguientes parámetros:
+
+```javascript
+const db = mysql.createPool({
+  host:     'mysql-39b03a90-dabrival03.b.aivencloud.com',
+  user:     'avnadmin',
+  port:     '22746',
+  password: process.env.DB_PASSWORD, // usar variable de entorno
+  database: 'kueski',
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
+});
+```
+
+> ⚠️ **Seguridad**: Nunca expongas la contraseña de Aiven directamente en el código. Utiliza variables de entorno (`.env`) y asegúrate de que el archivo esté incluido en `.gitignore`.
+
+---
 
 ### `usuario`
 Almacena la información personal de cada usuario.
@@ -192,33 +214,46 @@ Historial de transacciones realizadas.
 ### Requisitos Previos
 - **Google Chrome** (versión reciente)
 - **Node.js** y **npm** instalados
-- **XAMPP** (o cualquier servidor MySQL local) en ejecución
+- Credenciales de acceso al servicio **Aiven Cloud MySQL** (proporcionadas por el equipo)
 
 ---
 
-### 1. Configurar la Base de Datos
-
-1. Inicia **XAMPP** y arranca los servicios de **Apache** y **MySQL**.
-2. Abre **phpMyAdmin** en `http://localhost/phpmyadmin`.
-3. Crea una base de datos llamada `kueskipro`.
-4. Importa el archivo `kueskipro.sql` ubicado en la raíz del proyecto.
-
-```sql
--- La base de datos se crea automáticamente con el script SQL
--- Solo debes importar el archivo kueskipro.sql en phpMyAdmin
-```
-
-> ⚠️ El servidor está configurado por defecto con usuario `root` y contraseña vacía. Si tu configuración de MySQL es diferente, edita las credenciales en `KueskiServer/server.js`.
-
----
-
-### 2. Iniciar el Servidor Backend
+### 1. Clonar el Repositorio
 
 ```bash
-# Navegar a la carpeta del servidor
-cd KueskiServer
+git clone https://github.com/CarlosGl05/Extension-Kueski.git
+cd Extension-Kueski
+```
 
-# Instalar dependencias
+---
+
+### 2. Configurar Variables de Entorno del Servidor
+
+Crea un archivo `.env` dentro de la carpeta `KueskiServer/`:
+
+```bash
+cd KueskiServer
+touch .env
+```
+
+Agrega las credenciales de Aiven al archivo `.env`:
+
+```env
+DB_HOST=mysql-39b03a90-dabrival03.b.aivencloud.com
+DB_USER=avnadmin
+DB_PORT=22746
+DB_PASSWORD=tu_contraseña_aiven
+DB_NAME=kueski
+```
+
+> ⚠️ El archivo `.env` **no debe subirse a GitHub**. Verifica que esté en `.gitignore`.
+
+---
+
+### 3. Iniciar el Servidor Backend
+
+```bash
+# Dentro de la carpeta KueskiServer/
 npm install
 
 # Iniciar el servidor
@@ -229,13 +264,13 @@ El servidor correrá en: **`http://localhost:3000`**
 
 Deberías ver en la consola:
 ```
-🔌 Conectado exitosamente a la base de datos MySQL (kueskipro) en XAMPP.
+🔌 Conectado exitosamente a la base de datos MySQL (kueski) en Aiven Cloud.
 🚀 Servidor backend corriendo en http://localhost:3000
 ```
 
 ---
 
-### 3. Instalar la Extensión en Chrome
+### 4. Instalar la Extensión en Chrome
 
 1. Abre Google Chrome y navega a `chrome://extensions/`.
 2. Activa el **Modo de desarrollador** (toggle en la esquina superior derecha).
@@ -338,9 +373,9 @@ Calcula las opciones de financiamiento para un artículo.
   "precioOriginal": 8988.00,
   "creditoDisponible": 25000.00,
   "opciones": [
-    { "quincenas": 0,  "pagoQuincenal": 8988.00, "totalAPagar": 8988.00,   "etiqueta": "De Contado" },
-    { "quincenas": 6,  "pagoQuincenal": 1673.52, "totalAPagar": 10041.12,  "etiqueta": "6 Quincenas" },
-    { "quincenas": 12, "pagoQuincenal": 957.83,  "totalAPagar": 11493.96,  "etiqueta": "12 Quincenas" }
+    { "quincenas": 0,  "pagoQuincenal": 8988.00, "totalAPagar": 8988.00,  "etiqueta": "De Contado" },
+    { "quincenas": 6,  "pagoQuincenal": 1673.52, "totalAPagar": 10041.12, "etiqueta": "6 Quincenas" },
+    { "quincenas": 12, "pagoQuincenal": 957.83,  "totalAPagar": 11493.96, "etiqueta": "12 Quincenas" }
   ]
 }
 ```
@@ -372,10 +407,11 @@ Extension-Kueski/
 ├── 📁 KueskiServer/
 │   ├── 📄 server.js           # Servidor Express con 5 endpoints REST
 │   ├── 📄 package.json        # Metadatos y dependencias del proyecto Node.js
-│   └── 📄 package-lock.json   # Versiones exactas de dependencias instaladas
+│   ├── 📄 package-lock.json   # Versiones exactas de dependencias instaladas
+│   └── 📄 .env                # Variables de entorno con credenciales Aiven (no subir a Git)
 │
 ├── 📄 kueskipro.sql           # Dump completo de la BD (estructura + datos de prueba)
-├── 📄 .gitignore              # Exclusión de node_modules
+├── 📄 .gitignore              # Exclusión de node_modules y .env
 └── 📄 README.md               # Documentación del proyecto
 ```
 
@@ -385,8 +421,8 @@ Extension-Kueski/
 
 | Nombre | Rol |
 |---|---|
-| Angel Landín López| Desarrollador |
-| Carlos Andrés Gloria Cortez| Front-end |
+| Angel Landín López | Desarrollador |
+| Carlos Andrés Gloria Cortez | Front-end |
 | David Bribiesca Valtierra | Bases de datos |
 | Francisco Alarcón | Backlog Manager |
 
