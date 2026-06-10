@@ -35,14 +35,13 @@
     const precioArticulo = getAmazonPrice();
     const logoUrl = chrome.runtime.getURL("logo.png");
 
-    // Guardamos el precio si existe (para la simulación posterior)
     if (precioArticulo) {
       chrome.storage.local.set({ amazonPrice: precioArticulo });
     } else {
-      chrome.storage.local.remove(['amazonPrice']); // Limpiamos si no hay precio
+      chrome.storage.local.remove(['amazonPrice']); 
     }
 
-    // 1. Inyectar el botón fijo (FAB) siempre
+    // 1. Inyectar el botón fijo (FAB)
     const fab = document.createElement('div');
     fab.id = 'kueski-fab';
     fab.title = 'Abrir Kueski Pay';
@@ -54,7 +53,6 @@
     widget.id = 'kueski-floating-widget';
 
     if (precioArticulo) {
-      // ESTAMOS EN UN PRODUCTO: Mostrar Quincenas + Cashback
       const pagoFormateated = calcQuincena(precioArticulo).toLocaleString('es-MX', { style: 'currency', currency: 'MXN' });
       widget.innerHTML = `
         <div class="kueski-minimal-content">
@@ -70,7 +68,6 @@
         <button class="kueski-minimal-close" id="kueski-fw-close-btn">&times;</button>
       `;
     } else {
-      // ESTAMOS EN EL HOME (O SIN PRECIO): Mostrar solo Cashback
       widget.innerHTML = `
         <div class="kueski-minimal-content">
           <img src="${logoUrl}" alt="Kueski" class="kueski-minimal-logo">
@@ -91,6 +88,9 @@
     // 3. Función para abrir la app
     const openExtension = () => {
       if (document.getElementById('kueski-app-container')) return;
+
+      // ====== CAMBIO AQUÍ: OCULTAMOS EL BOTÓN FLOTANTE ======
+      fab.style.display = 'none';
 
       const popupUrl = chrome.runtime.getURL("popup.html");
       
@@ -122,7 +122,12 @@
       `;
       closeAppBtn.onmouseover = () => { closeAppBtn.style.background = '#f1f5f9'; closeAppBtn.style.color = '#dc2626'; };
       closeAppBtn.onmouseout = () => { closeAppBtn.style.background = '#ffffff'; closeAppBtn.style.color = '#475569'; };
-      closeAppBtn.onclick = () => appContainer.remove();
+      
+      // ====== CAMBIO AQUÍ: VOLVEMOS A MOSTRAR EL BOTÓN AL CERRAR ======
+      closeAppBtn.onclick = () => {
+        appContainer.remove();
+        fab.style.display = 'flex'; // Reaparece el botón
+      };
 
       const iframeWrapper = document.createElement('div');
       iframeWrapper.style.cssText = `
@@ -139,6 +144,7 @@
       appContainer.appendChild(iframeWrapper);
       document.body.appendChild(appContainer);
 
+      // Desaparece el Toast largo si estaba abierto
       if (document.getElementById('kueski-floating-widget')) {
         widget.style.animation = "kueskiToastOut 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards";
         setTimeout(() => widget.remove(), 400);
@@ -146,6 +152,7 @@
     };
 
     fab.addEventListener('click', openExtension);
+    
     widget.addEventListener('click', (e) => {
       if (e.target.closest('#kueski-fw-close-btn')) return;
       openExtension();

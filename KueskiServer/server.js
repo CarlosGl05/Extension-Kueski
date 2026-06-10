@@ -13,7 +13,7 @@ const db = mysql.createPool({
   user: 'avnadmin',
   port: '22746',     
   password: 'AVNS_ontfuibJigjnGFBKgBx',      
-  database: 'kueski',
+  database: 'kueskipro',
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
